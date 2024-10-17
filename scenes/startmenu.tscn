@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjcfaquiqf5pm"]
+
+[ext_resource type="Script" path="res://scripts/startmenu.gd" id="1_af31t"]
+[ext_resource type="Texture2D" uid="uid://dw8ndcptc05kj" path="res://assets/ui/title_background.png" id="3_4tusx"]
+[ext_resource type="AudioStream" uid="uid://182w80ovxpuy" path="res://assets/sound/Blip_select 1.wav" id="5_snb51"]
+[ext_resource type="AudioStream" uid="uid://c1yi3ksovxiem" path="res://assets/sound/Random 7.wav" id="6_wip1c"]
+[ext_resource type="PackedScene" uid="uid://b67xxyaxkeva4" path="res://scenes/palette_overlay.tscn" id="7_c77yb"]
+[ext_resource type="FontFile" uid="uid://b5ktx8r0h2wv2" path="res://assets/fonts/pixel5x5font_white.png" id="7_qxrby"]
+[ext_resource type="Texture2D" uid="uid://bnq0mx4pev2rt" path="res://assets/ui/title_card.png" id="8_hj4rw"]
+
+[sub_resource type="Animation" id="Animation_t4fpc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TitleCard:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 52)]
+}
+
+[sub_resource type="Animation" id="Animation_h7ayj"]
+resource_name = "float"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TitleCard:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(80, 52), Vector2(80, 51), Vector2(80, 50), Vector2(80, 51)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eujxu"]
+_data = {
+"RESET": SubResource("Animation_t4fpc"),
+"float": SubResource("Animation_h7ayj")
+}
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_af31t")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 144.0
+color = Color(0.341176, 0.619608, 0.580392, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(80, 72)
+texture = ExtResource("3_4tusx")
+
+[node name="focus_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_snb51")
+
+[node name="select_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_wip1c")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 96.0
+offset_right = 150.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("7_qxrby")
+theme_override_font_sizes/font_size = 6
+text = "press K
+to begin..."
+horizontal_alignment = 1
+
+[node name="TitleCard" type="Sprite2D" parent="."]
+position = Vector2(80, 52)
+texture = ExtResource("8_hj4rw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eujxu")
+}
+
+[node name="palette_overlay" parent="." instance=ExtResource("7_c77yb")]
+visible = false
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 160.0
+offset_bottom = 144.0

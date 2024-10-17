@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://4nlogiv6lyn0"]
+
+[ext_resource type="Texture2D" uid="uid://b1kwibels3jad" path="res://assets/particle.png" id="1_82wpb"]
+[ext_resource type="Gradient" uid="uid://dettbbdvdsc4d" path="res://scenes/particle_color_ramp_fadeaway.tres" id="1_kp13i"]
+[ext_resource type="Script" path="res://scripts/particles_jump.gd" id="2_0ofw3"]
+
+[sub_resource type="Curve" id="Curve_f8utl"]
+_data = [Vector2(0.00558659, 1), 0.0, 0.0, 0, 0, Vector2(0.734637, 0.746793), 0.0, 0.0, 0, 0, Vector2(1, 0.119952), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="particles_jump" type="CPUParticles2D"]
+z_index = -1
+position = Vector2(0, 4)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.6
+texture = ExtResource("1_82wpb")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -30)
+initial_velocity_max = 10.0
+damping_min = 5.0
+damping_max = 5.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_f8utl")
+color_ramp = ExtResource("1_kp13i")
+script = ExtResource("2_0ofw3")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]

@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://c241kwk5o8gbh"]
+
+[ext_resource type="Script" path="res://scripts/venemy.gd" id="1_dygx8"]
+[ext_resource type="Texture2D" uid="uid://cde5c1mk7tboh" path="res://assets/test/whitesquare.png" id="1_rwkr6"]
+[ext_resource type="Texture2D" uid="uid://djiiabbjyagyh" path="res://assets/entities/Sprites_player_enemies.png" id="2_fb60a"]
+[ext_resource type="AudioStream" uid="uid://b5v5bfcfhltsn" path="res://assets/sound/hit_hurt.wav" id="4_buofw"]
+[ext_resource type="Gradient" uid="uid://dettbbdvdsc4d" path="res://scenes/particle_color_ramp_fadeaway.tres" id="5_mh5xo"]
+[ext_resource type="Texture2D" uid="uid://b1kwibels3jad" path="res://assets/particle.png" id="5_mput5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s3ju"]
+atlas = ExtResource("2_fb60a")
+region = Rect2(20, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spqid"]
+atlas = ExtResource("2_fb60a")
+region = Rect2(20, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boe00"]
+atlas = ExtResource("2_fb60a")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5nh7y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s3ju")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spqid")
+}],
+"loop": true,
+"name": &"middle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boe00")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oqbxq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sujrr"]
+radius = 4.0
+
+[sub_resource type="Curve" id="Curve_0ym1k"]
+_data = [Vector2(0, 0.990736), 0.0, 0.0, 0, 0, Vector2(0.564246, 0.888836), 0.0, 0.0, 0, 0, Vector2(1, 0.24038), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="VEnemy1" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 261
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_dygx8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 4
+sprite_frames = SubResource("SpriteFrames_5nh7y")
+animation = &"up"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_rwkr6")
+
+[node name="wall_detect" type="ShapeCast2D" parent="."]
+scale = Vector2(0.35, 0.35)
+shape = SubResource("CircleShape2D_oqbxq")
+target_position = Vector2(0, 2.85714)
+collision_mask = 261
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.95, 0.95)
+shape = SubResource("CircleShape2D_sujrr")
+
+[node name="sound_bump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_buofw")
+pitch_scale = 0.7
+max_distance = 150.0
+attenuation = 0.757858
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemy"]]
+
+[node name="hitbox" type="CollisionShape2D" parent="hitbox"]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("CircleShape2D_sujrr")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 10
+texture = ExtResource("5_mput5")
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 10.0
+damping_max = 10.0
+scale_amount_min = 0.1
+scale_amount_curve = SubResource("Curve_0ym1k")
+color_ramp = ExtResource("5_mh5xo")

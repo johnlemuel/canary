@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b67xxyaxkeva4"]
+
+[ext_resource type="Material" uid="uid://dqyljyjvo0r26" path="res://shadersandresources/palette_overlay_material.tres" id="1_n4pm5"]
+
+[node name="palette_overlay" type="ColorRect"]
+process_mode = 3
+material = ExtResource("1_n4pm5")
+offset_right = 160.0
+offset_bottom = 144.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

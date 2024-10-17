@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgvomxd71xy4b"]
+
+[ext_resource type="Texture2D" uid="uid://djiiabbjyagyh" path="res://assets/entities/Sprites_player_enemies.png" id="1_jdcj3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnj1l"]
+atlas = ExtResource("1_jdcj3")
+region = Rect2(20, 40, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwsdc"]
+atlas = ExtResource("1_jdcj3")
+region = Rect2(10, 40, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn7r8"]
+atlas = ExtResource("1_jdcj3")
+region = Rect2(0, 40, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tawkg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnj1l")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwsdc")
+}],
+"loop": true,
+"name": &"0.5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn7r8")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}]
+
+[node name="Feathers" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_tawkg")
+animation = &"0"

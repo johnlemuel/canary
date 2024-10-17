@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://drfsdi075yddj"]
+
+[ext_resource type="Script" path="res://scripts/util.gd" id="1_qne0j"]
+[ext_resource type="AudioStream" uid="uid://dqyl2cd22ryu0" path="res://assets/sound/music/main_theme.wav" id="2_7rvog"]
+[ext_resource type="AudioStream" uid="uid://c3rcglc63lbt4" path="res://assets/sound/pause.wav" id="3_ljf4x"]
+[ext_resource type="PackedScene" uid="uid://b4i7qa75t87hj" path="res://scenes/text.tscn" id="4_fl7kb"]
+
+[node name="util" type="Node"]
+process_mode = 3
+script = ExtResource("1_qne0j")
+
+[node name="main_theme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_7rvog")
+max_distance = 1e+10
+attenuation = 8.05361e-05
+bus = &"Music"
+
+[node name="pause_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ljf4x")
+max_distance = 1e+09
+
+[node name="pause_menu" type="CanvasLayer" parent="."]
+
+[node name="paused_text" parent="pause_menu" instance=ExtResource("4_fl7kb")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -3.0
+offset_right = 36.0
+offset_bottom = 3.0
+text = "PAUSED"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pause_menu"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -22.0
+offset_right = 60.0
+offset_bottom = -6.0
+grow_vertical = 0
+
+[node name="hearts_text" parent="pause_menu/VBoxContainer" instance=ExtResource("4_fl7kb")]
+layout_mode = 2
+text = "Hearts:"
+horizontal_alignment = 0
+
+[node name="feathers_text" parent="pause_menu/VBoxContainer" instance=ExtResource("4_fl7kb")]
+layout_mode = 2
+text = "Feathers:"
+horizontal_alignment = 0

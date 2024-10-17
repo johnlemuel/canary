@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://67f7ts5uk8jw"]
+
+[ext_resource type="Script" path="res://scripts/jumps.gd" id="1_v8pkc"]
+[ext_resource type="PackedScene" uid="uid://dgvomxd71xy4b" path="res://scenes/feather.tscn" id="1_xw6mp"]
+[ext_resource type="AudioStream" uid="uid://bfsb83tbyxanu" path="res://assets/sound/heart_gain.wav" id="3_y17q0"]
+
+[node name="Jumps" type="Node2D"]
+script = ExtResource("1_v8pkc")
+
+[node name="Feathers" type="Node" parent="."]
+
+[node name="Feather" parent="Feathers" instance=ExtResource("1_xw6mp")]
+position = Vector2(8, 20)
+animation = &"1"
+
+[node name="bounce_delay" type="Timer" parent="."]
+wait_time = 1.2
+autostart = true
+
+[node name="bounce" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="regain_feathers" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="feather_gain_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_y17q0")
+max_distance = 1e+08
+bus = &"SoundFX"
+
+[connection signal="timeout" from="bounce_delay" to="." method="_on_delay_jump_timeout"]

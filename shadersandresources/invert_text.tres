@@ -1,0 +1,100 @@
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://clrsu82vy3644"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1r2g1"]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_702xa"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+texture_source = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_s7lsi"]
+expanded_output_ports = [0]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_cjdtr"]
+default_input_values = [0, 0.0, 1, 0.0, 2, 0.1, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_emysm"]
+constant = Color(0, 0, 0, 1)
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_i5haf"]
+expanded_output_ports = [0]
+constant = Color(0.329412, 0.329412, 0.329412, 1)
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_n4epx"]
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D Texture2DParameter : source_color, hint_screen_texture;
+
+
+
+void fragment() {
+// Input:11
+	vec2 n_out11p0 = SCREEN_UV;
+
+
+	vec4 n_out16p0;
+// Texture2D:16
+	n_out16p0 = texture(Texture2DParameter, n_out11p0);
+	float n_out16p1 = n_out16p0.r;
+
+
+// ColorConstant:21
+	vec4 n_out21p0 = vec4(0.329412, 0.329412, 0.329412, 1.000000);
+	float n_out21p1 = n_out21p0.r;
+
+
+// ColorConstant:20
+	vec4 n_out20p0 = vec4(0.000000, 0.000000, 0.000000, 1.000000);
+
+
+// ColorConstant:23
+	vec4 n_out23p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+	vec3 n_out19p0;
+// If:19
+	float n_in19p2 = 0.10000;
+	if(abs(n_out16p1 - n_out21p1) < n_in19p2)
+	{
+		n_out19p0 = vec3(n_out20p0.xyz);
+	}
+	else if(n_out16p1 < n_out21p1)
+	{
+		n_out19p0 = vec3(n_out23p0.xyz);
+	}
+	else
+	{
+		n_out19p0 = vec3(n_out20p0.xyz);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out19p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(540, -1040)
+nodes/fragment/11/node = SubResource("VisualShaderNodeInput_1r2g1")
+nodes/fragment/11/position = Vector2(-1900, -2000)
+nodes/fragment/14/node = SubResource("VisualShaderNodeTexture2DParameter_702xa")
+nodes/fragment/14/position = Vector2(-1980, -1620)
+nodes/fragment/16/node = SubResource("VisualShaderNodeTexture_s7lsi")
+nodes/fragment/16/position = Vector2(-1060, -1940)
+nodes/fragment/19/node = SubResource("VisualShaderNodeIf_cjdtr")
+nodes/fragment/19/position = Vector2(-480, -1060)
+nodes/fragment/20/node = SubResource("VisualShaderNodeColorConstant_emysm")
+nodes/fragment/20/position = Vector2(-1320, -960)
+nodes/fragment/21/node = SubResource("VisualShaderNodeColorConstant_i5haf")
+nodes/fragment/21/position = Vector2(-1320, -760)
+nodes/fragment/23/node = SubResource("VisualShaderNodeColorConstant_n4epx")
+nodes/fragment/23/position = Vector2(-1320, -320)
+nodes/fragment/connections = PackedInt32Array(11, 0, 16, 0, 19, 0, 0, 0, 14, 0, 16, 2, 23, 0, 19, 5, 20, 0, 19, 4, 20, 0, 19, 3, 21, 1, 19, 1, 16, 1, 19, 0)

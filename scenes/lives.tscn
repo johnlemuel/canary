@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuij7fdjy5jk8"]
+
+[ext_resource type="Script" path="res://scripts/lives.gd" id="1_0e3sc"]
+[ext_resource type="PackedScene" uid="uid://dt4tq8fml1ukq" path="res://scenes/heart.tscn" id="2_kesk1"]
+[ext_resource type="AudioStream" uid="uid://bfsb83tbyxanu" path="res://assets/sound/heart_gain.wav" id="2_xtym4"]
+
+[node name="Lives" type="Node2D"]
+script = ExtResource("1_0e3sc")
+
+[node name="Hearts" type="Node" parent="."]
+
+[node name="heart" parent="Hearts" instance=ExtResource("2_kesk1")]
+position = Vector2(8, 8)
+
+[node name="heart2" parent="Hearts" instance=ExtResource("2_kesk1")]
+position = Vector2(20, 8)
+
+[node name="heart3" parent="Hearts" instance=ExtResource("2_kesk1")]
+position = Vector2(32, 8)
+
+[node name="delay_jump" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="jump" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="regain_health" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="heart_gain_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_xtym4")
+max_distance = 1e+10
+bus = &"SoundFX"
+
+[connection signal="timeout" from="delay_jump" to="." method="_on_delay_jump_timeout"]

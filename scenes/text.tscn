@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4i7qa75t87hj"]
+
+[ext_resource type="FontFile" uid="uid://b5ktx8r0h2wv2" path="res://assets/fonts/pixel5x5font_white.png" id="1_o5eam"]
+
+[node name="text" type="Label"]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5eam")
+theme_override_font_sizes/font_size = 6
+text = "Example Text"
+horizontal_alignment = 1
+vertical_alignment = 1

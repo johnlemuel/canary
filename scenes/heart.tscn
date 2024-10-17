@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt4tq8fml1ukq"]
+
+[ext_resource type="Texture2D" uid="uid://djiiabbjyagyh" path="res://assets/entities/Sprites_player_enemies.png" id="1_e4dwy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6m07"]
+atlas = ExtResource("1_e4dwy")
+region = Rect2(20, 30, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k67nw"]
+atlas = ExtResource("1_e4dwy")
+region = Rect2(10, 30, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y4fl"]
+atlas = ExtResource("1_e4dwy")
+region = Rect2(0, 30, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7r1w6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6m07")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k67nw")
+}],
+"loop": true,
+"name": &"0.5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y4fl")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}]
+
+[node name="heart" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_7r1w6")
+animation = &"1"

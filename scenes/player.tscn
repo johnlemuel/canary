@@ -1,0 +1,269 @@
+[gd_scene load_steps=25 format=3 uid="uid://dg0s075fjcyki"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_g7ac1"]
+[ext_resource type="Texture2D" uid="uid://cde5c1mk7tboh" path="res://assets/test/whitesquare.png" id="1_jhtvu"]
+[ext_resource type="Texture2D" uid="uid://djiiabbjyagyh" path="res://assets/entities/Sprites_player_enemies.png" id="3_ltb68"]
+[ext_resource type="AudioStream" uid="uid://csjb6orbier85" path="res://assets/sound/jump2.wav" id="4_l7g1u"]
+[ext_resource type="AudioStream" uid="uid://b5v5bfcfhltsn" path="res://assets/sound/hit_hurt.wav" id="5_wa568"]
+[ext_resource type="Texture2D" uid="uid://b1kwibels3jad" path="res://assets/particle.png" id="6_fehcn"]
+[ext_resource type="Gradient" uid="uid://dettbbdvdsc4d" path="res://scenes/particle_color_ramp_fadeaway.tres" id="6_vvhna"]
+[ext_resource type="AudioStream" uid="uid://0l0hlt5r83us" path="res://assets/sound/grave_settle.wav" id="7_nbg1r"]
+[ext_resource type="AudioStream" uid="uid://fnd1ni18hyil" path="res://assets/sound/walk.wav" id="8_ux111"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qo47p"]
+radius = 4.0404
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcf48"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(0, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgtut"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(10, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p5kv"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnd0x"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(0, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clu7o"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(0, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82pha"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(0, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5flnr"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6x74"]
+atlas = ExtResource("3_ltb68")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_axf8i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcf48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgtut")
+}],
+"loop": true,
+"name": &"glide",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p5kv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnd0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clu7o")
+}],
+"loop": false,
+"name": &"jump_squat",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82pha")
+}],
+"loop": true,
+"name": &"rise",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5flnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6x74")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6jrfi"]
+
+[sub_resource type="Curve" id="Curve_4jdnu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.597765, 0.749881), 0.0, 0.0, 0, 0, Vector2(1, 0.169359), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_wu10t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.793296, 0.873397), 0.0, 0.0, 0, 0, Vector2(1, 0.163183), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_8cj5w"]
+offsets = PackedFloat32Array(0.0166667, 0.566667)
+colors = PackedColorArray(1, 1, 1, 1, 0.666667, 0.666667, 0.666667, 1)
+
+[sub_resource type="Curve" id="Curve_ivj04"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.575419, 0.657245), 0.0, 0.0, 0, 0, Vector2(1, 0.0180522), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 4
+collision_layer = 2
+collision_mask = 29
+script = ExtResource("1_g7ac1")
+
+[node name="GroundCollision" type="CollisionShape2D" parent="."]
+scale = Vector2(0.98, 0.98)
+shape = SubResource("CircleShape2D_qo47p")
+
+[node name="EntityItemCollision" type="Area2D" parent="."]
+collision_mask = 41
+
+[node name="EntityItemCollision" type="CollisionShape2D" parent="EntityItemCollision"]
+scale = Vector2(0.98, 0.98)
+shape = SubResource("CircleShape2D_qo47p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_jhtvu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_axf8i")
+animation = &"walk"
+
+[node name="sound_jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_l7g1u")
+volume_db = -10.0
+bus = &"SoundFX"
+
+[node name="sound_hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_wa568")
+volume_db = 5.0
+bus = &"SoundFX"
+
+[node name="spikes_collider" type="ShapeCast2D" parent="."]
+z_index = -1
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_6jrfi")
+target_position = Vector2(0, 0)
+collision_mask = 16
+
+[node name="one_way_collider" type="ShapeCast2D" parent="."]
+z_index = -1
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_6jrfi")
+target_position = Vector2(0, 0)
+collision_mask = 512
+
+[node name="stun_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="invincibility_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="flash_timer" type="Timer" parent="."]
+wait_time = 0.08
+
+[node name="spawn_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ground_left" type="RayCast2D" parent="."]
+position = Vector2(-3, 0)
+target_position = Vector2(0, 8)
+
+[node name="ground_right" type="RayCast2D" parent="."]
+position = Vector2(3, 0)
+target_position = Vector2(0, 8)
+
+[node name="particles_run" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(0, 4)
+emitting = false
+lifetime = 0.5
+preprocess = 5.0
+explosiveness = 0.4
+texture = ExtResource("6_fehcn")
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(-1, 0)
+gravity = Vector2(0, -30)
+initial_velocity_max = 5.0
+damping_min = 5.0
+damping_max = 5.0
+scale_amount_min = 0.1
+scale_amount_max = 0.9
+scale_amount_curve = SubResource("Curve_4jdnu")
+color_ramp = ExtResource("6_vvhna")
+
+[node name="first_spawn_timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="audio_spawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_nbg1r")
+volume_db = 5.0
+max_distance = 1e+08
+
+[node name="spawn_particles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 8)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.6
+texture = ExtResource("6_fehcn")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+damping_min = 10.0
+damping_max = 10.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_wu10t")
+color_ramp = SubResource("Gradient_8cj5w")
+
+[node name="sound_walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ux111")
+volume_db = -10.0
+pitch_scale = 0.7
+max_distance = 1e+08
+
+[node name="walk_sound_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="death_timer" type="Timer" parent="."]
+
+[node name="death_particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("6_fehcn")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
+radial_accel_min = -40.0
+radial_accel_max = -40.0
+scale_amount_min = 0.3
+scale_amount_curve = SubResource("Curve_ivj04")
+color = Color(0, 0, 0, 1)
+
+[connection signal="area_entered" from="EntityItemCollision" to="." method="_on_hazard_collision_area_entered"]
+[connection signal="area_exited" from="EntityItemCollision" to="." method="_on_entity_item_collision_area_exited"]
+[connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]

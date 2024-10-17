@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://nfk15c0psbpl"]
+
+[ext_resource type="Script" path="res://scripts/pickups.gd" id="1_5dbfn"]
+[ext_resource type="Texture2D" uid="uid://cewrg17dvh0lw" path="res://assets/items/pickup_feather.png" id="2_11rpc"]
+[ext_resource type="AudioStream" uid="uid://woo5n1f6chy4" path="res://assets/sound/pickup_coin.wav" id="3_ny1by"]
+[ext_resource type="Texture2D" uid="uid://dui6plyksjbng" path="res://shadersandresources/visibility_circle_simple.png" id="4_sxotx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njg73"]
+atlas = ExtResource("2_11rpc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r86yh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njg73")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gm5xo"]
+radius = 4.0
+
+[node name="pickup_feather" type="Area2D" groups=["pickup"]]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_5dbfn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r86yh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ny1by")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+scale = Vector2(1.6, 1.6)
+shape = SubResource("CircleShape2D_gm5xo")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.666667, 0.666667, 0.666667, 1)
+range_layer_min = -101
+texture = ExtResource("4_sxotx")
+texture_scale = 0.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
