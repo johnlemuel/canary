@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://byi60eeogsj3b"
+path="res://.godot/imported/pixel5x5font_timer.png-422216465952de5c256cb50d6f0bd275.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/pixel5x5font_timer.png"
+dest_files=["res://.godot/imported/pixel5x5font_timer.png-422216465952de5c256cb50d6f0bd275.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("48-58")
+kerning_pairs=PackedStringArray()
+columns=11
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=2

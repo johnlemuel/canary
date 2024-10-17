@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://65rcckhd3oqg"
+path="res://.godot/imported/pixel5x5font_black.png-16d62fb719a6b499309e0e5e8aabe3a2.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/pixel5x5font_black.png"
+dest_files=["res://.godot/imported/pixel5x5font_black.png-16d62fb719a6b499309e0e5e8aabe3a2.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("32-126")
+kerning_pairs=PackedStringArray()
+columns=19
+rows=5
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=2
